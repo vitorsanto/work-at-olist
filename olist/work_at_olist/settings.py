@@ -45,6 +45,7 @@ LOCAL_APPS = [
 
 THIRD_PARTY_APPS = [
     'rest_framework',
+    'django_nose',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +138,12 @@ LOCALE_PATHS = (
 REST_FRAMEWORK = {
     'TEST_REQUEST_DEFAULT_FORMAT': 'json'
 }
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+# Django nose arguments
+NOSE_ARGS = [
+    '--cover-erase',
+    '--with-coverage',
+    '--cover-package=apps',
+]
