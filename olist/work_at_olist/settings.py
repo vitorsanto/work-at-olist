@@ -41,6 +41,7 @@ DJANGO_APPS = [
 
 LOCAL_APPS = [
     'apps.call_records_app',
+    'apps.telephone_bill_app',
 ]
 
 THIRD_PARTY_APPS = [
