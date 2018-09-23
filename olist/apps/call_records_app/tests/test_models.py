@@ -11,43 +11,42 @@ class TestCallRecord(TestCase):
         """
         Tests the creation of a new call record
         """
-        for _ in range(10):
-            self.callrecord = mommy.make(CallRecord)
-            self.assertTrue(isinstance(self.callrecord, CallRecord))
+        self.callrecord = mommy.make(CallRecord)
+        self.assertTrue(isinstance(self.callrecord, CallRecord))
 
-            expected_output = 'call_id: %(call_id)s, type: %(call_type)s, timestamp: %(timestamp)s.' % {
-                'call_id': self.callrecord.call_id,
-                'call_type': self.callrecord.call_type,
-                'timestamp': self.callrecord.timestamp}
+        expected_output = 'call_id: %(call_id)s, type: %(call_type)s, timestamp: %(timestamp)s.' % {
+            'call_id': self.callrecord.call_id,
+            'call_type': self.callrecord.call_type,
+            'timestamp': self.callrecord.timestamp}
 
-            self.assertEquals(self.callrecord.__str__(), expected_output)
+        self.assertEquals(self.callrecord.__str__(), expected_output)
 
     def test_callrecord_type_validator(self):
         """
         Tests the source number type validation of a call record
         """
-        for _ in range(10):
-            number = utils.random_alphanumeric_generator()
-            self.callrecord = mommy.make(CallRecord, source=number)
-            with self.assertRaises(ValidationError) as cm:
-                self.callrecord.full_clean()
-            e = cm.exception
-            self.assertTrue('source' in e.message_dict.keys())
-            self.assertTrue('Phone number must have only numeric digits.' in e.messages)
+
+        number = utils.random_alphanumeric_generator(11)
+        print(number)
+        self.callrecord_type = mommy.make(CallRecord, source=number)
+        with self.assertRaises(ValidationError) as cm:
+            self.callrecord_type.full_clean()
+        e = cm.exception
+        self.assertTrue('source' in e.message_dict.keys())
+        self.assertTrue('Phone number must have only numeric digits.' in e.messages)
 
     def test_callrecord_length_validator(self):
         """
         Tests the source number length validation of a call record
         """
-
-        for _ in range(10):
-            number = utils.random_numeric_generator()
-            self.callrecord = mommy.make(CallRecord, source=number)
-            with self.assertRaises(ValidationError) as cm:
-                self.callrecord.full_clean()
-            e = cm.exception
-            self.assertTrue('source' in e.message_dict.keys())
-            self.assertTrue('Phone number must have 10 or 11 digits.' in e.messages)
+        number = utils.random_numeric_generator(13)
+        print(number)
+        self.callrecord_len = mommy.make(CallRecord, source=number)
+        with self.assertRaises(ValidationError) as cm:
+            self.callrecord_len.full_clean()
+        e = cm.exception
+        self.assertTrue('source' in e.message_dict.keys())
+        self.assertTrue('Phone number must have 10 or 11 digits.' in e.messages)
 
     def test_callrecord_compromised_flag(self):
         """
