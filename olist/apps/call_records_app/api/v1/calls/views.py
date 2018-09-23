@@ -1,6 +1,6 @@
 from rest_framework import generics
 
-from .serializer import CallRecordSerializer
+from .serializers import CallRecordSerializer
 
 
 class CreateCallRecordView(generics.CreateAPIView):

@@ -22,4 +22,5 @@ urlpatterns = [
     path('', include_docs_urls(title='Phone bill calculator API',
                                description='RESTful API for Phone bill calculation')),
     path('calls/', include('apps.call_records_app.urls')),
+    path('bills/', include('apps.telephone_bill_app.urls')),
 ]
