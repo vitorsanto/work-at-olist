@@ -9,4 +9,4 @@ class CallRecordSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = models.CallRecord
-        exclude = ('compromised', )
+        exclude = ('compromised', 'created_at')
