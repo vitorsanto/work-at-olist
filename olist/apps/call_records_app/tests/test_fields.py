@@ -6,29 +6,55 @@ from django.core.exceptions import ValidationError
 
 class TestCallRecord(TestCase):
 
-    def setUp(self):
-        self.callrecord = mommy.make(CallRecord)
-
-    """
-    Tests the creation of a new call record
-    """
-
     def test_callrecord_creation(self):
+        """
+        Tests the creation of a new call record
+        """
+        self.callrecord = mommy.make(CallRecord)
         self.assertTrue(isinstance(self.callrecord, CallRecord))
-        self.assertTrue(self.callrecord.__str__(), self.callrecord.source)
 
-    """
-    Tests the source number type validation of a call record
-    """
+        expected_output = 'call_id: %(call_id)s, type: %(call_type)s, timestamp: %(timestamp)s.' % {
+            'call_id': self.callrecord.call_id,
+            'call_type': self.callrecord.call_type,
+            'timestamp': self.callrecord.timestamp}
+
+        self.assertEquals(self.callrecord.__str__(), expected_output)
 
     def test_callrecord_type_validator(self):
-        self.callrecord.source = 'a1_5T231+['
-        self.assertRaises(ValidationError, self.callrecord.full_clean)
-
-    """
-    Tests the source number length validation of a call record
-    """
+        """
+        Tests the source number type validation of a call record
+        """
+        self.callrecord = mommy.make(CallRecord, source='a1_5T231+[')
+        with self.assertRaises(ValidationError) as cm:
+            self.callrecord.full_clean()
+        e = cm.exception
+        self.assertTrue('source' in e.message_dict.keys())
+        self.assertTrue('Phone number must have only numeric digits.' in e.messages)
 
     def test_callrecord_length_validator(self):
-        self.callrecord.source = 123456789101112
-        self.assertRaises(ValidationError, self.callrecord.full_clean)
+        """
+        Tests the source number length validation of a call record
+        """
+        self.callrecord = mommy.make(CallRecord, source=123456789101112)
+        with self.assertRaises(ValidationError) as cm:
+            self.callrecord.full_clean()
+        e = cm.exception
+        self.assertTrue('source' in e.message_dict.keys())
+        self.assertTrue('Phone number must have 10 or 11 digits.' in e.messages)
+
+    def test_callrecord_compromised_flag(self):
+        """
+        Tests the compromised validation of a call record
+        *Registers are considered 'compromised' in these cases:
+            - don't have a call_id
+            - don't have a destination number
+            - don't have a timestamp
+        """
+        self.callrecord_1 = mommy.make(CallRecord, call_id=None)
+        self.assertTrue(self.callrecord_1.compromised)
+
+        self.callrecord_2 = mommy.make(CallRecord, destination=None)
+        self.assertTrue(self.callrecord_2.compromised)
+
+        self.callrecord_3 = mommy.make(CallRecord, timestamp=None)
+        self.assertTrue(self.callrecord_3.compromised)

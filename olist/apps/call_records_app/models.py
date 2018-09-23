@@ -34,9 +34,11 @@ class CallRecord(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('created at'))
 
-    # TODO: Change the str return statement
     def __str__(self):
-        return str(self.source)
+        return _('call_id: %(call_id)s, type: %(call_type)s, timestamp: %(timestamp)s.') % {
+            'call_id': self.call_id,
+            'call_type': self.call_type,
+            'timestamp': self.timestamp}
 
     def save(self, *args, **kwargs):
         if not self.call_id or self.destination or self.timestamp:

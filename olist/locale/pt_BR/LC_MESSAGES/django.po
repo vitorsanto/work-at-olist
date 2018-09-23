@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-22 16:30-0300\n"
+"POT-Creation-Date: 2018-09-22 23:05-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\apps\call_records_app\apps.py:7
+msgid "call records app"
+msgstr ""
 
 #: .\apps\call_records_app\choices.py:4
 msgid "Yes"
@@ -39,46 +43,66 @@ msgid "call timestamp"
 msgstr ""
 
 #: .\apps\call_records_app\models.py:14
+msgid "The timestamp of when the event occurred"
+msgstr ""
+
+#: .\apps\call_records_app\models.py:16
 msgid "call type"
 msgstr ""
 
-#: .\apps\call_records_app\models.py:15
+#: .\apps\call_records_app\models.py:18
+msgid "Indicate if it is a call start or end record."
+msgstr ""
+
+#: .\apps\call_records_app\models.py:20
 msgid "call ID"
 msgstr ""
 
-#: .\apps\call_records_app\models.py:18
+#: .\apps\call_records_app\models.py:21
+msgid "Unique ID for each call record pair."
+msgstr ""
+
+#: .\apps\call_records_app\models.py:23
 msgid "origin phone number"
 msgstr ""
 
-#: .\apps\call_records_app\models.py:22
-msgid "destination phone number"
-msgstr ""
-
 #: .\apps\call_records_app\models.py:25
-msgid "compromised"
+msgid "The subscriber phone number that originated the call."
 msgstr ""
 
 #: .\apps\call_records_app\models.py:28
+msgid "destination phone number"
+msgstr ""
+
+#: .\apps\call_records_app\models.py:30
+msgid "The phone number receiving the call."
+msgstr ""
+
+#: .\apps\call_records_app\models.py:32
+msgid "compromised"
+msgstr ""
+
+#: .\apps\call_records_app\models.py:35
 msgid "created at"
 msgstr ""
 
-#: .\apps\call_records_app\models.py:31
+#: .\apps\call_records_app\models.py:39
 #, python-format
-msgid "Source: %(source)s"
+msgid "call_id: %(call_id)s, type: %(call_type)s, timestamp: %(timestamp)s."
 msgstr ""
 
-#: .\apps\call_records_app\models.py:41
+#: .\apps\call_records_app\models.py:52
 msgid "call records"
 msgstr ""
 
-#: .\apps\call_records_app\models.py:42
+#: .\apps\call_records_app\models.py:53
 msgid "call record"
 msgstr ""
 
-#: .\apps\call_records_app\utils\validators.py:12
-msgid "Phone number must have only numeric characters."
+#: .\apps\call_records_app\utils\validators.py:10
+msgid "Phone number must have only numeric digits."
 msgstr ""
 
-#: .\apps\call_records_app\utils\validators.py:14
-msgid "Phone number must have 10 or 11 characters."
+#: .\apps\call_records_app\utils\validators.py:12
+msgid "Phone number must have 10 or 11 digits."
 msgstr ""
