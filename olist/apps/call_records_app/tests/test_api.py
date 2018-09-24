@@ -49,6 +49,11 @@ class CreateRoomTest(APITestCase):
         response = self.client.post(reverse('v1_create_call'), self.obj_src)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-        self.obj_no_data = utils.json_generator(timestamp=False, calltype=False, callid=False, src=False, dest=False)
+        self.obj_no_data = utils.json_generator(
+            timestamp=False,
+            calltype=False,
+            callid=False,
+            src=False, dest=False
+        )
         response = self.client.post(reverse('v1_create_call'), self.obj_no_data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)

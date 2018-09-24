@@ -1,5 +1,5 @@
 from rest_framework import generics
-from apps.call_records_app.models import CallRecord
+from apps.call_records_app.models.models import CallRecord
 from apps.call_records_app.api.v1.calls.serializers import CallRecordSerializer
 
 

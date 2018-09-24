@@ -1,6 +1,6 @@
 from django.test import TestCase
 from model_mommy import mommy
-from apps.call_records_app.models import CallRecord
+from apps.call_records_app.models.models import CallRecord
 from django.core.exceptions import ValidationError
 from apps.call_records_app import utils
 
@@ -14,10 +14,11 @@ class TestCallRecord(TestCase):
         self.callrecord = mommy.make(CallRecord)
         self.assertTrue(isinstance(self.callrecord, CallRecord))
 
-        expected_output = 'call_id: %(call_id)s, type: %(call_type)s, timestamp: %(timestamp)s.' % {
-            'call_id': self.callrecord.call_id,
-            'call_type': self.callrecord.call_type,
-            'timestamp': self.callrecord.timestamp}
+        expected_output = \
+            'call_id: %(call_id)s, type: %(call_type)s, timestamp: %(timestamp)s.' % {
+                'call_id': self.callrecord.call_id or '',
+                'call_type': self.callrecord.call_id or '',
+                'timestamp': self.callrecord.call_id or ''}
 
         self.assertEquals(self.callrecord.__str__(), expected_output)
 

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.utils.translation import ugettext as _
-from apps.call_records_app import models
+from apps.call_records_app.models.models import CallRecord
 
 
 class CallRecordSerializer(serializers.ModelSerializer):
@@ -9,7 +9,7 @@ class CallRecordSerializer(serializers.ModelSerializer):
     """
 
     class Meta:
-        model = models.CallRecord
+        model = CallRecord
         exclude = ('compromised', 'created_at')
 
     def validate(self, data):
