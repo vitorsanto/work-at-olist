@@ -1,13 +1,18 @@
-from django.utils import timezone
-from random import randint, choice
 import string
+from random import randint, choice
+
+from django.utils import timezone
 
 
 def json_generator(timestamp=True, calltype=True, callid=True, src=True, dest=True):
     """
     Generates a modularized random json
-    :return:
-        A random-generated json
+    :param timestamp: a flag that indicates if the generator should fill the timestamp value
+    :param calltype: a flag that indicates if the generator should fill the call_type value
+    :param callid: a flag that indicates if the generator should fill the call_id value
+    :param src: a flag that indicates if the generator should fill the source value
+    :param dest: a flag that indicates if the generator should fill the destination value
+    :return: A random-generated json
     """
 
     if timestamp:
@@ -55,8 +60,8 @@ def json_generator(timestamp=True, calltype=True, callid=True, src=True, dest=Tr
 def random_alphanumeric_generator(length=11):
     """
     Generates a random alphanumeric string
-    :return:
-        A random-generated alphanumeric string
+    :param length: a desired length for the string
+    :return r_alphanumeric_string: A random-generated alphanumeric string
     """
     r_alphanumeric_string = ''.join(choice(string.printable) for _ in range(length))
     return r_alphanumeric_string
@@ -65,8 +70,8 @@ def random_alphanumeric_generator(length=11):
 def random_numeric_generator(length=13):
     """
     Generates a random numeric
-    :return:
-        A random-generated numeric
+    :param length: a desired length for the string
+    :return r_numeric: A random-generated numeric
     """
     r_numeric = int(''.join(choice(string.digits) for _ in range(length)))
     return r_numeric

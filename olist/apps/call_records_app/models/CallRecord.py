@@ -1,6 +1,6 @@
 from django.db import models
+from django.utils.timezone import datetime
 from django.utils.translation import ugettext_lazy as _
-
 from apps.call_records_app import utils
 from apps.call_records_app.models.choices import BOOLEAN_CHOICES, CALL_TYPE
 
@@ -18,20 +18,19 @@ class CallRecord(models.Model):
 
     call_type = models.PositiveSmallIntegerField(
         verbose_name=_('call type'), choices=CALL_TYPE,
-        null=True, blank=True,
-        help_text=_('Indicate if it is a call start or end record.')
+        help_text=_('Indicate if it is a call start or end record.'),
     )
 
     call_id = models.PositiveIntegerField(
         verbose_name=_('call ID'),
-        null=True, blank=True,
-        help_text=_('Unique ID for each call record pair.')
+        help_text=_('Unique ID for each call record pair.'),
     )
 
     source = models.CharField(
         max_length=20,
         verbose_name=_('origin phone number'),
-        validators=[utils.phone_number_validator, ],
+        null=True, blank=True,
+        validators=[utils.phone_number_validator],
         help_text=_('The subscriber phone number that originated the call.')
     )
 
@@ -53,6 +52,15 @@ class CallRecord(models.Model):
         verbose_name=_('created at')
     )
 
+    reference_month = models.PositiveIntegerField(
+        null=True, blank=True, verbose_name=_('reference month')
+    )
+    reference_year = models.PositiveIntegerField(
+        null=True, blank=True, verbose_name=_('reference year')
+    )
+
+    processed_call = models.BooleanField(default=False, verbose_name=_('processed call'))
+
     def __str__(self):
         return _(
             'call_id: %(call_id)s, type: %(call_type)s, timestamp: %(timestamp)s.') % {
@@ -61,8 +69,22 @@ class CallRecord(models.Model):
                    'timestamp': self.timestamp or ''}
 
     def save(self, *args, **kwargs):
-        if not self.call_id or self.destination or self.timestamp:
+        if self.call_type == 1:
+            if self.destination in ['', ' ', None]:
+                self.compromised = True
+
+        if self.call_type == 2:
+            if self.timestamp:
+                self.reference_month = self.timestamp.month
+                self.reference_year = self.timestamp.year
+            else:
+                now = datetime.now()
+                self.reference_month = now.month
+                self.reference_year = now.year
+
+        if not self.timestamp:
             self.compromised = True
+
         super().save(*args, **kwargs)
 
     class Meta:

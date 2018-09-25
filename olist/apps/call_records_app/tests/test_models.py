@@ -1,8 +1,9 @@
+from django.core.exceptions import ValidationError
 from django.test import TestCase
 from model_mommy import mommy
-from apps.call_records_app.models.models import CallRecord
-from django.core.exceptions import ValidationError
+
 from apps.call_records_app import utils
+from apps.call_records_app.models.CallRecord import CallRecord
 
 
 class TestCallRecord(TestCase):
@@ -11,14 +12,14 @@ class TestCallRecord(TestCase):
         """
         Tests the creation of a new call record
         """
-        self.callrecord = mommy.make(CallRecord)
+        self.callrecord = mommy.make(CallRecord, call_type=2)
         self.assertTrue(isinstance(self.callrecord, CallRecord))
 
         expected_output = \
             'call_id: %(call_id)s, type: %(call_type)s, timestamp: %(timestamp)s.' % {
                 'call_id': self.callrecord.call_id or '',
-                'call_type': self.callrecord.call_id or '',
-                'timestamp': self.callrecord.call_id or ''}
+                'call_type': self.callrecord.call_type or '',
+                'timestamp': self.callrecord.timestamp or ''}
 
         self.assertEquals(self.callrecord.__str__(), expected_output)
 
@@ -28,7 +29,6 @@ class TestCallRecord(TestCase):
         """
 
         number = utils.random_alphanumeric_generator(11)
-        print(number)
         self.callrecord_type = mommy.make(CallRecord, source=number)
         with self.assertRaises(ValidationError) as cm:
             self.callrecord_type.full_clean()
@@ -40,8 +40,7 @@ class TestCallRecord(TestCase):
         """
         Tests the source number length validation of a call record
         """
-        number = utils.random_numeric_generator(13)
-        print(number)
+        number = utils.random_numeric_generator(15)
         self.callrecord_len = mommy.make(CallRecord, source=number)
         with self.assertRaises(ValidationError) as cm:
             self.callrecord_len.full_clean()
@@ -53,12 +52,9 @@ class TestCallRecord(TestCase):
         """
         Tests the compromised validation of a call record
         *Registers are considered 'compromised' in these cases:
-            - don't have a call_id
             - don't have a destination number
             - don't have a timestamp
         """
-        self.callrecord_1 = mommy.make(CallRecord, call_id=None)
-        self.assertTrue(self.callrecord_1.compromised)
 
         self.callrecord_2 = mommy.make(CallRecord, destination=None)
         self.assertTrue(self.callrecord_2.compromised)
