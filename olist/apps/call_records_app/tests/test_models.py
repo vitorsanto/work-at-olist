@@ -12,7 +12,7 @@ class TestCallRecord(TestCase):
         """
         Tests the creation of a new call record
         """
-        self.callrecord = mommy.make(CallRecord, call_type=2)
+        self.callrecord = mommy.make(CallRecord)
         self.assertTrue(isinstance(self.callrecord, CallRecord))
 
         expected_output = \

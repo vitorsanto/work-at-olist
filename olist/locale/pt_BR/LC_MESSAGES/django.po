@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-22 23:05-0300\n"
+"POT-Creation-Date: 2018-09-27 07:40-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,91 +18,165 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\apps\call_records_app\apps.py:7
+#: apps/call_records_app/api/v1/calls/serializers.py:25
+msgid "A start call must have a source number."
+msgstr ""
+
+#: apps/call_records_app/apps.py:7
 msgid "call records app"
 msgstr ""
 
-#: .\apps\call_records_app\choices.py:4
-msgid "Yes"
-msgstr ""
-
-#: .\apps\call_records_app\choices.py:5
-msgid "No"
-msgstr ""
-
-#: .\apps\call_records_app\choices.py:9
-msgid "Start"
-msgstr ""
-
-#: .\apps\call_records_app\choices.py:10
-msgid "End"
-msgstr ""
-
-#: .\apps\call_records_app\models.py:13
+#: apps/call_records_app/models/CallRecord.py:14
 msgid "call timestamp"
 msgstr ""
 
-#: .\apps\call_records_app\models.py:14
+#: apps/call_records_app/models/CallRecord.py:16
 msgid "The timestamp of when the event occurred"
 msgstr ""
 
-#: .\apps\call_records_app\models.py:16
+#: apps/call_records_app/models/CallRecord.py:20
 msgid "call type"
 msgstr ""
 
-#: .\apps\call_records_app\models.py:18
+#: apps/call_records_app/models/CallRecord.py:21
 msgid "Indicate if it is a call start or end record."
 msgstr ""
 
-#: .\apps\call_records_app\models.py:20
+#: apps/call_records_app/models/CallRecord.py:25
+#: apps/telephone_bill_app/models/TelephoneBill.py:28
 msgid "call ID"
 msgstr ""
 
-#: .\apps\call_records_app\models.py:21
+#: apps/call_records_app/models/CallRecord.py:26
+#: apps/telephone_bill_app/models/TelephoneBill.py:30
 msgid "Unique ID for each call record pair."
 msgstr ""
 
-#: .\apps\call_records_app\models.py:23
+#: apps/call_records_app/models/CallRecord.py:31
+#: apps/telephone_bill_app/models/TelephoneBill.py:35
 msgid "origin phone number"
 msgstr ""
 
-#: .\apps\call_records_app\models.py:25
+#: apps/call_records_app/models/CallRecord.py:34
+#: apps/telephone_bill_app/models/TelephoneBill.py:37
 msgid "The subscriber phone number that originated the call."
 msgstr ""
 
-#: .\apps\call_records_app\models.py:28
+#: apps/call_records_app/models/CallRecord.py:39
+#: apps/telephone_bill_app/models/TelephoneBill.py:42
 msgid "destination phone number"
 msgstr ""
 
-#: .\apps\call_records_app\models.py:30
+#: apps/call_records_app/models/CallRecord.py:41
 msgid "The phone number receiving the call."
 msgstr ""
 
-#: .\apps\call_records_app\models.py:32
+#: apps/call_records_app/models/CallRecord.py:46
+#: apps/telephone_bill_app/models/TelephoneBill.py:49
 msgid "compromised"
 msgstr ""
 
-#: .\apps\call_records_app\models.py:35
+#: apps/call_records_app/models/CallRecord.py:52
+#: apps/telephone_bill_app/models/TelephoneBill.py:67
 msgid "created at"
 msgstr ""
 
-#: .\apps\call_records_app\models.py:39
+#: apps/call_records_app/models/CallRecord.py:56
+#: apps/telephone_bill_app/models/TelephoneBill.py:73
+msgid "reference month"
+msgstr ""
+
+#: apps/call_records_app/models/CallRecord.py:59
+#: apps/telephone_bill_app/models/TelephoneBill.py:76
+msgid "reference year"
+msgstr ""
+
+#: apps/call_records_app/models/CallRecord.py:62
+msgid "processed call"
+msgstr ""
+
+#: apps/call_records_app/models/CallRecord.py:66
 #, python-format
 msgid "call_id: %(call_id)s, type: %(call_type)s, timestamp: %(timestamp)s."
 msgstr ""
 
-#: .\apps\call_records_app\models.py:52
+#: apps/call_records_app/models/CallRecord.py:93
 msgid "call records"
 msgstr ""
 
-#: .\apps\call_records_app\models.py:53
+#: apps/call_records_app/models/CallRecord.py:94
 msgid "call record"
 msgstr ""
 
-#: .\apps\call_records_app\utils\validators.py:10
+#: apps/call_records_app/models/choices.py:4
+msgid "Yes"
+msgstr ""
+
+#: apps/call_records_app/models/choices.py:5
+msgid "No"
+msgstr ""
+
+#: apps/call_records_app/models/choices.py:9
+msgid "Start"
+msgstr ""
+
+#: apps/call_records_app/models/choices.py:10
+msgid "End"
+msgstr ""
+
+#: apps/call_records_app/utils/validators.py:10
 msgid "Phone number must have only numeric digits."
 msgstr ""
 
-#: .\apps\call_records_app\utils\validators.py:12
+#: apps/call_records_app/utils/validators.py:12
 msgid "Phone number must have 10 or 11 digits."
+msgstr ""
+
+#: apps/telephone_bill_app/apps.py:7
+msgid "telephone bill app"
+msgstr ""
+
+#: apps/telephone_bill_app/models/TelephoneBill.py:16
+msgid "started at"
+msgstr ""
+
+#: apps/telephone_bill_app/models/TelephoneBill.py:18
+msgid "The timestamp of when the call has started"
+msgstr ""
+
+#: apps/telephone_bill_app/models/TelephoneBill.py:22
+msgid "finished at"
+msgstr ""
+
+#: apps/telephone_bill_app/models/TelephoneBill.py:24
+msgid "The timestamp of when the call has finished"
+msgstr ""
+
+#: apps/telephone_bill_app/models/TelephoneBill.py:44
+msgid "The phone number that received the call."
+msgstr ""
+
+#: apps/telephone_bill_app/models/TelephoneBill.py:55
+msgid "call duration"
+msgstr ""
+
+#: apps/telephone_bill_app/models/TelephoneBill.py:62
+msgid "call cost"
+msgstr ""
+
+#: apps/telephone_bill_app/models/TelephoneBill.py:70
+msgid "processed"
+msgstr ""
+
+#: apps/telephone_bill_app/models/TelephoneBill.py:81
+#, python-format
+msgid "call_id: %(call_id)s, cost: %(call_cost)s, duration: %(call_duration)s."
+msgstr ""
+
+#: apps/telephone_bill_app/models/TelephoneBill.py:107
+msgid "telephone bills"
+msgstr ""
+
+#: apps/telephone_bill_app/models/TelephoneBill.py:108
+msgid "telephone bill"
 msgstr ""
