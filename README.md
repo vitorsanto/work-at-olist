@@ -1,5 +1,5 @@
 
-#The Phone Bill Calculator!
+# The Phone Bill Calculator!
 
 This is my solution for the proposed challenge:
 Implement an application that receives call detail records
@@ -31,35 +31,37 @@ and calculates monthly bills for a given telephone number.
 * **Pytz -** This library allows accurate and cross platform timezone calculations using Python.
 
 # APIs routes available in this project:
-1. /bills/api/v1/bill/{source_number} (Get):
+1. **/bills/api/v1/bill/{source_number} (Get):**
    * Returns a telephone bill of a given number at a give reference period.
      * To pass a reference month and a reference year, user this pattern: month={month}&year={year}
-#### Examples
-   /bills/api/v1/bill/99988526423?month=9?year=2018
 
+Examples:
+    
+    /bills/api/v1/bill/99988526423?month=9?year=2018
+    /bills/api/v1/bill/99988526423
 
 2. /calls/api/v1/callrecord/ (Post):
    * Creates a new Call record.
-     * **Parameter    Required   Description							Type/Format**
-	* timestamp		  The timestamp of when the event occurred			 string  / YYYY-MM-DDThh:mm[:ss[.uuuuuu]][+HH:MM|-HH:MM|Z]
-	* call_type      X        Indicate if it is a call start or end record.			 integer / 1 for 'start' calls records and 2 for 'end' calls records) 
-	* call_id        X        Unique ID for each call record pair.				 integer
- 	* source		  The subscriber phone number that originated the call.		 string  / AAXXXXXXXXX, where AA is the area code and XXXXXXXXX is the phone number. The phone number is composed of 8 or 9 digits.
-	* destination		  The phone number receiving the call.				 string  / AAXXXXXXXXX, where AA is the area code and XXXXXXXXX is the phone number. The phone number is composed of 8 or 9 digits.
+     * **Parameters**
+	* 'timestamp' -> string in formats YYYY-MM-DDThh:mm[:ss[.uuuuuu]][+HH:MM|-HH:MM|Z].
+	* 'call_type' -> integer (Use 1 for 'start' calls records and 2 for 'end' calls records).
+	* 'call_id'   -> integer (Unique ID for each call record pair)
+ 	* 'source'    -> string in format AAXXXXXXXXX, where AA is the area code and XXXXXXXXX is the phone number. The phone number is composed of 8 or 9 digits.
+	* destination -> string inf format AAXXXXXXXXX, where AA is the area code and XXXXXXXXX is the phone number. The phone number is composed of 8 or 9 digits.
 
 
-#### Examples
+Examples:
 
 1. Call Start Record
 
 ```
 {
-  "id":  // Record unique identificator;
-  "call_type":  // Indicate if it's a call "start" or "end" record;
-  "timestamp":  // The timestamp of when the event occured;
-  "call_id":  // Unique for each call record pair;
-  "source":  // The subscriber phone number that originated the call;
-  "destination":  // The phone number receiving the call.
+    "id": 36,
+    "timestamp": "2017-12-12T12:00:00-03:00",
+    "call_type": 1,
+    "call_id": 12,
+    "source": "99988526423",
+    "destination": "9993468278"
 }
 ```
 
@@ -67,10 +69,12 @@ and calculates monthly bills for a given telephone number.
 
 ```
 {
-   "id":  // Record unique identificator;
-   "call_type":  // Indicate if it's a call "start" or "end" record;
-   "timestamp":  // The timestamp of when the event occured;
-   "call_id":  // Unique for each call record pair.
+    "id": 37,
+    "timestamp": "2017-12-12T00:01:00-02:00",
+    "call_type": 2,
+    "call_id": 12,
+    "source": "",
+    "destination": ""
 }
 ```
 
