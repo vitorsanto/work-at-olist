@@ -43,11 +43,11 @@ Examples:
 2. /calls/api/v1/callrecord/ (Post):
    * Creates a new Call record.
    * Parameters
-     ** timestamp -> string in formats YYYY-MM-DDThh:mm[:ss[.uuuuuu]][+HH:MM|-HH:MM|Z].
-     ** call_type -> integer (Use 1 for 'start' calls records and 2 for 'end' calls records).
-     ** call_id   -> integer (Unique ID for each call record pair)
-     ** source    -> string in format AAXXXXXXXXX, where AA is the area code and XXXXXXXXX is the phone number. The phone number is composed of 8 or 9 digits.
-     ** destination -> string inf format AAXXXXXXXXX, where AA is the area code and XXXXXXXXX is the phone number. The phone number is composed of 8 or 9 digits.
+     * timestamp -> string in formats YYYY-MM-DDThh:mm[:ss[.uuuuuu]][+HH:MM|-HH:MM|Z].
+     * call_type -> integer (Use 1 for 'start' calls records and 2 for 'end' calls records).
+     * call_id   -> integer (Unique ID for each call record pair)
+     * source    -> string in format AAXXXXXXXXX, where AA is the area code and XXXXXXXXX is the phone number. The phone number is composed of 8 or 9 digits.
+     * destination -> string inf format AAXXXXXXXXX, where AA is the area code and XXXXXXXXX is the phone number. The phone number is composed of 8 or 9 digits.
 
 Examples:
 
@@ -56,7 +56,7 @@ Examples:
 ```
 {
     "id": 36,
-    "timestamp": "2017-12-12T12:00:00-03:00",
+    "timestamp": "2017-12-12T12:00:00",
     "call_type": 1,
     "call_id": 12,
     "source": "99988526423",
@@ -69,7 +69,7 @@ Examples:
 ```
 {
     "id": 37,
-    "timestamp": "2017-12-12T00:01:00-02:00",
+    "timestamp": "2017-12-12T00:01:00",
     "call_type": 2,
     "call_id": 12,
     "source": "",

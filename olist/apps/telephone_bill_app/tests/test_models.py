@@ -3,7 +3,7 @@ from django.test import TestCase
 from model_mommy import mommy
 
 from apps.call_records_app import utils
-from apps.telephone_bill_app.models import TelephoneBill
+from apps.telephone_bill_app.models.TelephoneBill import TelephoneBill
 
 
 class TestTelephoneBill(TestCase):
@@ -56,7 +56,7 @@ class TestTelephoneBill(TestCase):
         """
 
         self.bill_1 = mommy.make(TelephoneBill, started_at=None)
-        self.assertTrue(self.callrecord_2.compromised)
+        self.assertTrue(self.bill_1.compromised)
 
-        self.bill_1 = mommy.make(TelephoneBill, finished_at=None)
-        self.assertTrue(self.callrecord_3.compromised)
+        self.bill_2 = mommy.make(TelephoneBill, finished_at=None)
+        self.assertTrue(self.bill_2.compromised)

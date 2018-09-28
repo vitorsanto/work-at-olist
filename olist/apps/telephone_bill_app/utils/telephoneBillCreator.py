@@ -25,7 +25,7 @@ def telephone_bill_creator(src_number, reference_month, reference_year):
     call_records = CallRecord.objects \
                        .filter(call_id__in=call_ids) \
                        .filter(source=src_number) \
-                       .filter(processed_call=False) | CallRecord.objects.filter(query)
+                       .filter(processed_call=False) | CallRecord.objects.filter(call_id__in=call_ids)
 
     call_dict = defaultdict(list)
 
@@ -53,7 +53,10 @@ def create_telephone_bill(call_records):
             telephone_bill.finished_at = call_record.timestamp
         mark_as_processed.append(call_record.id)
 
-    telephone_bill.save()
-
-    # Marks the calls as processed
-    CallRecord.objects.filter(pk__in=mark_as_processed).update(processed_call=True)
+	# Marks the calls as processed if the bill is created successfully  
+    try:
+        telephone_bill.full_clean()
+        telephone_bill.save()
+        CallRecord.objects.filter(pk__in=mark_as_processed).update(processed_call=True)  
+    except Exception:
+        pass
